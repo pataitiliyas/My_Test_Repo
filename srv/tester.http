@@ -1,0 +1,105 @@
+###Get Service document
+GET http://localhost:4004/odata/v4/CatalogService/
+###Get metadata document of the service
+GET http://localhost:4004/odata/v4/CatalogService/$metadata
+###Get Employee Data
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+###Load data with pagination
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$skip=2&$top=2
+###Filtering odata
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=salaryAmount ge 100000
+###Count Records
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+###Read Employee by KEY
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+###Create new employee data
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Iliyas",
+  "nameMiddle": null,
+  "nameLast": "Patayit",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "iliyas@gmail.com",
+  "loginName": "Iliyas",
+  "Currency_code": "USD",
+  "salaryAmount": 68597,
+  "accountNumber": "7766554433",
+  "bankId": "121000358",
+  "bankName": "My Bank of San Francisco"
+}
+###Update data
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/e3b12542-af02-4c53-bbfe-b09276267732
+Content-Type: application/json
+
+{
+ "salaryAmount":10010100   
+}
+
+###Delete request
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/e3b12542-af02-4c53-bbfe-b09276267732
+Content-Type: application/json
+
+###Load My employee
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/e3b12542-af02-4c53-bbfe-b09276267732
+
+###GET PO DATA
+GET http://localhost:4004/odata/v4/CatalogService/POs
+
+###GET Single PO Data - join was carrid only givern PO
+GET http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052?$expand=Items
+
+### GET Single PO Data - join was carrid only givern PO
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052/boost
+Content-Type: application/json
+
+{}
+
+###GET the purchase order data
+GET http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052
+
+
+### GET Single PO Data - join was carrid only givern PO
+GET http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052/largestOrder()
+
+
+### Conditional Check
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Iliyas",
+  "nameMiddle": null,
+  "nameLast": "Patayit",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "iliyas@gmail.com",
+  "loginName": "Iliyas",
+  "Currency_code": "USD",
+  "salaryAmount": 100000000,
+  "accountNumber": "7766554433",
+  "bankId": "121000358",
+  "bankName": "My Bank of San Francisco"
+}
+
+###Use custom generic entity
+GET http://localhost:4004/odata/v4/MyService/ReadEmployeeSrv
+
+###Use custom generic entity
+GET http://localhost:4004/odata/v4/MyService/ReadEmployeeSrv
+
+###Use custom generic entity
+GET http://localhost:4004/odata/v4/MyService/ReadEmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+
+
+
+
+
+
