@@ -2,12 +2,15 @@
 using { anubhav.db } from '../db/datamodel';
 using { anubhav.cds } from '../db/CDSViews';
 
-service CatalogService @(path:'CatalogService')  {
+service CatalogService @(path:'CatalogService', requires: 'authenticated-user')  {
   @Capabilities:{Insertable,Updatable,Deletable:false}
     entity BusinessPartnerSet as projection on db.master.businesspartner;
     entity AddressSet as projection on db.master.address;
     
-    entity EmployeeSet as projection on db.master.employees;
+    entity EmployeeSet @(restrict: [ 
+                        { grant: ['READ'], to: 'Viewer', where: 'bankName = $user.BankName' },
+                        { grant: ['WRITE'], to: 'Admin' }
+                        ])  as projection on db.master.employees;
     entity PurchaseOrderItems as projection on db.transaction.poitems;
    
     entity POs @(
